@@ -1,45 +1,58 @@
 "use client"
 
+import axios from "axios"
+import Image from "next/image"
 import { useSearchParams } from "next/navigation"
-import { useEffect, useRef, useState } from "react"
+import { useEffect, useState } from "react"
 
 const page = () => {
   const searchParams = useSearchParams()
   const [boxCount, setBoxCount] = useState<number>(0);
-  const input = useRef
-  const [inputValues, setInputValues] = useState<{ [key: number]: string }>({});
+  const [meme, setMeme] = useState<string | null>(null);
+
   
-     // Get individual parameters
-     const url = searchParams.get('url')?? '';
-     const id = searchParams.get('id')?? '';
-     
-     const updateInputValue = (index: number, value: string) => {
-      setInputValues((prev) => ({ ...prev, [index]: value }));
+  // Get individual parameters
+  // const url = searchParams.get('url')?? '';
+  const id = searchParams.get('id')?? '';
+  useEffect(() => {
+    const count = parseInt(searchParams.get('box_count') ?? '0', 10);
+    setBoxCount(count);
+  }, [searchParams]);
+
+  const [inputValues, setInputValues] = useState(Array(boxCount).fill('')); // Initialize state with empty strings
+  
+     const updateInputValue = (index: number, value: string): void => {
+      const newValues: string[] = [...inputValues]; 
+      newValues[index] = value;                     
+      setInputValues(newValues);                 
     };
-    const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
       event.preventDefault();
-      console.log("Submitted Values:", inputValues);
+      console.log("Submitted Values:", inputValues[2]);
+      const response = await axios(`https://api.imgflip.com/caption_image?template_id=${id}&username=UmarKhan8&password=memeapp12&${inputValues.map((text , index) => `text${index}=${text}`).join(`&`)}`,{
+        method: 'POST'
+    })
+    console.log(response.data.data.url);
+    setMeme(response.data.data.url)
     };
     const renderInputFields = () => {
       return Array.from({ length: boxCount }).map((_, index) => (
         <div key={index}>
           <label>Input {index + 1}: </label>
           <input
+            className="text-black px-2 m-1"
             type="text"
             value={inputValues[index] || ''}
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) => updateInputValue(index, e.target.value)}
+            onChange={(e) => updateInputValue(index, e.target.value)}
           />
         </div>
       ));
     };
 
-     https://api.imgflip.com/caption_image?template_id=181913649&username=UmarKhan8&password=memeapp12&text0=Heythere&text1=hello world
+     
    
 
-  useEffect(() => {
-    const count = parseInt(searchParams.get('box_count') ?? '0', 10);
-    setBoxCount(count);
-  }, [searchParams]);
+ 
  
   
   
@@ -47,21 +60,11 @@ const page = () => {
   return (
     <>
     <h1>Generate</h1>
-    <img src={url} alt="meme" />
-    <p>ID: {id}</p>
-    <p>Box Count: {boxCount}</p>
     <form onSubmit={handleSubmit}>
-      <h1>Dynamic Input Fields</h1>
       {renderInputFields()}
       <button type="submit">Submit</button>
-    </form>
-    {Object.values(inputValues).map((value: string, index: number)  => {
-      return <div key={index}>
-        <p>{value}</p>
-      </div>
-    })}
-
-    
+    </form>    
+    {meme && <Image src={meme} width={200} height={150} alt="meme" />}
     </>
   )
 }
