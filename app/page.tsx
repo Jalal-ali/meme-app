@@ -1,8 +1,11 @@
 import axios from 'axios'
+import dynamic from 'next/dynamic';
 import Link from 'next/link'
+import { comment } from 'postcss';
 import React from 'react'
 
 const page = async () => {
+  const Component = dynamic(() => import('./generator/page'));
 
   interface memes {
     id: string ,
@@ -30,12 +33,11 @@ const page = async () => {
       {res ? res.map((item : memes) =>{ 
         return <div key={item.id} className='flex-co flex w-full bg-gray-800 justify-center'>
           <div className='flex-col'>
-
-          {/* <h1>{item.name}</h1> */}
           <img className='' src={item.url} alt="no-img" width={200} height={item.height} />
-          <button className='border rounded-lg p-2 m-2'><Link
+          <button className='m-3'><Link
+          className='border rounded-lg p-2'
         href={{
-          pathname: '/generator',
+          pathname: 'generator',
           query: {
             url: item.url,
             id: item.id,
