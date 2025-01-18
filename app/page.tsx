@@ -28,32 +28,52 @@ const page = async () => {
   
   return (
     <>
-    <h1 className='text-center'>Memes</h1>
-    <div className='text-center'>
-      {res ? res.map((item : memes) =>{ 
-        return <div key={item.id} className='flex-co flex w-full bg-gray-800 justify-center'>
-          <div className='flex-col'>
-          <img className='' src={item.url} alt="no-img" width={200} height={item.height} />
-          <button className='m-3'><Link
-          className='border rounded-lg p-2'
-        href={{
-          pathname: 'generator',
-          query: {
-            url: item.url,
-            id: item.id,
-            box_count: item.box_count,
-          },
-        }}
-      >create
-      </Link></button>
-          
+    <div className='bg-gray-950 py-5'>
+    <div className="max-w-3xl mx-auto text-center">
+    <h1 className="text-4xl font-bold text-gray-900 leading-tight mb-2 pb-4 relative">
+        <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-500 to-pink-500">Meme Generator</span>
+        <span className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-purple-500 to-pink-500"></span>
+    </h1>
+    <p className="text-lg text-gray-800 mb-8">In this web application, you can create multiple memes. Simply select any template to get started.</p>
+</div>
+    <div className='text-center border-t-2 border-b-2 py-4 rounded mx-4 flex justify-center flex-wrap gap-4 pt-4'>
+   
+    {res ? (
+  res.map((item: memes) => (
+    <div key={item.id} className="w-52">
+      <div className="hover:shadow-sm pb-4 pt-2 px-1  duration-400 hover:shadow-slate-400 border border-opacity-40 border-gray-800 bg-slate-950 object-contain rounded flex flex-col items-center">
+        <img
+          src={item.url}
+          className="shadow rounded object-fill w-48 h-44"
+          alt="Item"
+        />
+        <div className="mt-8">
+          <div className="mt-4">
+            <Link
+              className="focus:outline-none text-slate-200 bg-teal-900 hover:bg-teal-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2"
+              href={{
+                pathname: 'generator',
+                query: {
+                  url: item.url,
+                  id: item.id,
+                  box_count: item.box_count,
+                },
+              }}
+            >
+              Create
+            </Link>
           </div>
-           {/* <Image src={item.url} width={item.width} height={item.height} alt='meme-img' /> */}
-        </div>  
-      }) : <h1>Loading..</h1>}
+        </div>
+      </div>
     </div>
-    </>
+  ))
+) : (
+  <h1>Loading...</h1>
+)}
 
+    </div>
+                  </div>
+    </>
   )
 }
 
