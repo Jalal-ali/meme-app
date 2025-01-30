@@ -26,7 +26,7 @@ const page = async () => {
   
   return (
     <>
-    <div className='bg-[#0e111e]  py-5'>
+    <div className='bg-[#0e111e] scroll-smooth py-5'>
     <div className="max-w-3xl mx-auto text-center">
     <h1 className="text-4xl font-bold text-gray-900 leading-tight mb-2 pb-4 relative">
         <span className="font-sans bg-clip-text text-transparent bg-gradient-to-tr from-slate-400 to-gray-400">Meme Generator</span>
@@ -34,7 +34,7 @@ const page = async () => {
     </h1>
     <p className="text-lg font-sans text-slate-300 mb-8">In this web application, you can create multiple memes. Simply select any template to get started.</p>
 </div>
-    <div className='text-center border-t-2 border-b-2 border-slate-400 shadow-lg border-opacity-30 py-4 rounded mx-4 flex justify-center flex-wrap gap-4 pt-4'>
+    <div className='scroll-smooth text-center border-t-2 border-b-2 border-slate-400 shadow-lg border-opacity-30 py-4 rounded mx-4 flex justify-center flex-wrap gap-4 pt-4'>
    
     {res ? (
   res.map((item: memes) => (
