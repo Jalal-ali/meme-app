@@ -1,23 +1,22 @@
 "use client";
 
 import axios from "axios"
-import Image from "next/image"
-import { useSearchParams } from "next/navigation"
+// import { useSearchParams } from "next/navigation"
 import { useEffect, useState } from "react"
 
-const page = () => {
-  const searchParams = useSearchParams()
+const page = (searchParam : any) => {
+  // Get params
+  const { url, box_count, id } = searchParam.searchParams
+
+  // const searchParams = useSearchParams()
   const [boxCount, setBoxCount] = useState<number>(0);
   const [meme, setMeme] = useState<string | null>(null);
   const [download , setDownload] = useState(true)
 
-  const id = searchParams.get('id')?? '';
   // on page load 
   useEffect(() => {
-    // Get individual parameters
-    const url = searchParams.get('url')?? '';
     setMeme(url)
-    const count = parseInt(searchParams.get('box_count') ?? '0', 10);
+    const count = parseInt((box_count) ?? '0', 10);
     setBoxCount(count);
   }, []);
 
