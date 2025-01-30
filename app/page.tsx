@@ -24,8 +24,6 @@ const page = async () => {
     
   })
   
-  console.log(res);
-  
   return (
     <>
     <div className='bg-[#0e111e]  py-5'>

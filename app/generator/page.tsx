@@ -1,14 +1,12 @@
 "use client";
 
 import axios from "axios"
-// import { useSearchParams } from "next/navigation"
 import { useEffect, useState } from "react"
 
 const page = (searchParam : any) => {
   // Get params
   const { url, box_count, id } = searchParam.searchParams
 
-  // const searchParams = useSearchParams()
   const [boxCount, setBoxCount] = useState<number>(0);
   const [meme, setMeme] = useState<string | null>(null);
   const [download , setDownload] = useState(true)
@@ -36,7 +34,7 @@ const page = (searchParam : any) => {
         return
       }
       setMeme(null)
-      console.log("Submitted Values:", inputValues);
+      // console.log("Submitted Values:", inputValues);
       const response = await axios(`https://api.imgflip.com/caption_image?template_id=${id}&username=UmarKhan8&password=memeapp12&${inputValues.map((text , index) => `text${index}=${text}`).join(`&`)}`,{
         method: 'POST'
       })
@@ -73,18 +71,18 @@ const page = (searchParam : any) => {
         // Create a local URL for the Blob
         const blobUrl = URL.createObjectURL(blob);
     
-        // Create a temporary link element
+        //  link element
         const link = document.createElement("a");
         link.href = blobUrl;
-        link.download = "meme.jpg"; // Specify the filename
+        //  filename
+        link.download = "meme.jpg";
         document.body.appendChild(link);
-    
         // Trigger the download
         link.click();
     
-        // Clean up
+        // Clean 
         document.body.removeChild(link);
-        URL.revokeObjectURL(blobUrl); // Release memory
+        URL.revokeObjectURL(blobUrl);
       } catch (error) {
         console.error("Error downloading the image:", error);
       }
