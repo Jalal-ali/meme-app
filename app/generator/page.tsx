@@ -9,7 +9,7 @@ const page = (searchParam : any) => {
 
   const [boxCount, setBoxCount] = useState<number>(0);
   const [meme, setMeme] = useState<string | null>(null);
-  const [download , setDownload] = useState(true)
+  const [download , setDownload] = useState(false)
 
   // on page load 
   useEffect(() => {
@@ -47,9 +47,9 @@ const page = (searchParam : any) => {
     const renderInputFields = () => {
       return Array.from({ length: boxCount }).map((_, index) => (
         <div key={index} className="text-center items-center flex space-x-1 my-2">
-          <label className="font-mono" htmlFor="text"> {index + 1}.</label>
+          
           <input
-          placeholder="Text here..."
+          placeholder={`Text ${index + 1} here...`}
           className="w-full rounded-md border border-gray-800 shadow-md bg-slate-200 py-1 px-3 text-base font-medium text-black outline-none focus:border-[#6A64F1] focus:shadow-md"
           id="text"
             type="text"
@@ -96,8 +96,8 @@ const page = (searchParam : any) => {
   return (
     <>
     <div className="from-indigo-900 to-indigo-950 bg-gradient-to-tr pt-6 min-h-screen max-h-full">
-  <div className="flex justify-center items-center min-h-screen">
-    <div className="bg-gray-900 my-4 bg-opacity-40 backdrop-blur-2xl p-8 rounded-2xl shadow-2xl text-center w-full max-w-md">
+  <div className="flex justify-center items-center min-h-screen px-4 sm:px-6 lg:px-8">
+  <div className="bg-gray-900 bg-opacity-40 backdrop-blur-2xl my-5 p-8 sm:p-8 md:p-8 rounded-2xl shadow-2xl text-center w-full max-w-sm sm:max-w-md md:max-w-lg lg:max-w-xl">
       {meme ? (
         <img
           className="shadow-lg rounded-lg w-full max-w-60 justify-self-center"
