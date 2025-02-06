@@ -9,7 +9,7 @@ const page = (searchParam: any) => {
   const { url, box_count, id } = searchParam.searchParams
   const [boxCount, setBoxCount] = useState<number>(0);
   const [meme, setMeme] = useState<string | null>(null);
-  const [download, setDownload] = useState(true)
+  const [download, setDownload] = useState(false)
   const [toast, setToast] = useState<{ message: string; type: "success" | "error" } | null>(null);
 
   // on page load 
