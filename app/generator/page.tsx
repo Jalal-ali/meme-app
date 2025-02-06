@@ -100,7 +100,7 @@ const page = (searchParam : any) => {
   <div className="bg-gray-900 bg-opacity-40 backdrop-blur-2xl my-5 p-8 sm:p-8 md:p-8 rounded-2xl shadow-2xl text-center w-full max-w-sm sm:max-w-md md:max-w-lg lg:max-w-xl">
       {meme ? (
         <img
-          className="shadow-lg rounded-lg w-full max-w-60 mx-auto"
+          className="shadow-lg rounded-lg object-cover w-full max-w-96 mx-auto"
           src={meme}
           alt="meme"
         />
