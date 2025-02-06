@@ -96,11 +96,11 @@ const page = (searchParam : any) => {
   return (
     <>
     <div className="from-indigo-900 to-indigo-950 bg-gradient-to-tr pt-6 min-h-screen max-h-full">
-  <div className="flex justify-center items-center min-h-screen px-4 sm:px-6 lg:px-8">
+  <div className="flex justify-center items-center text-center min-h-screen px-4 sm:px-6 lg:px-8">
   <div className="bg-gray-900 bg-opacity-40 backdrop-blur-2xl my-5 p-8 sm:p-8 md:p-8 rounded-2xl shadow-2xl text-center w-full max-w-sm sm:max-w-md md:max-w-lg lg:max-w-xl">
       {meme ? (
         <img
-          className="shadow-lg rounded-lg w-full max-w-60 justify-self-center"
+          className="shadow-lg rounded-lg w-full max-w-60 mx-auto"
           src={meme}
           alt="meme"
         />
