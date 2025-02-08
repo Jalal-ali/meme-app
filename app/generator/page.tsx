@@ -3,7 +3,7 @@
 import axios from "axios"
 import { useEffect, useState } from "react"
 import Toast from "../components/Toast";
-
+import arrow from "../assets/arrow.svg"
 const page = (searchParam: any) => {
   // Get params
   const { url, box_count, id } = searchParam.searchParams
@@ -21,13 +21,14 @@ const page = (searchParam: any) => {
 
 
 
-  const [inputValues, setInputValues] = useState(Array(boxCount).fill('')); // Initialize state with empty strings
+  const [inputValues, setInputValues] = useState(Array(boxCount).fill(''));
 
   const updateInputValue = (index: number, value: string): void => {
     const newValues: string[] = [...inputValues];
     newValues[index] = value;
     setInputValues(newValues);
   };
+
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -47,6 +48,7 @@ const page = (searchParam: any) => {
       });
       const memeUrl = response.data.data.url;
       // success toast
+      setInputValues([]);
       setToast({ message: "Meme Created Successfully!", type: "success" });
       setMeme(memeUrl);
       setTimeout(() => setToast(null), 3000);
@@ -111,11 +113,29 @@ const page = (searchParam: any) => {
   return (
     <>
       <div className="from-indigo-950 to-emerald-950 bg-gradient-to-tr pt-6 min-h-screen max-h-full">
+        {/* Go Back Button */}
+  <button 
+    className="absolute top-4 left-4 flex justify-center gap-2 items-center text-center bg-white bg-opacity-10 hover:bg-opacity-30 text-white px-4 py-2 rounded-lg shadow-md hover:bg-gray-200 transition"
+    onClick={() => window.history.back()}
+  >
+     <svg
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        strokeWidth="2"
+        stroke="white"
+        className="w-8 h-8 text-center font-light text-white "
+      >
+        <circle cx="12.5" cy="12" r="9" stroke="white" strokeWidth="1" fill="none" />
+        <path strokeLinecap="round" strokeLinejoin="round" d="M14 16l-4-4 4-4" />
+      </svg>
+    Back
+  </button>
         <div className="flex justify-center items-center text-center min-h-screen px-4 sm:px-6 lg:px-8">
           <div className="bg-gray-800 bg-opacity-40 backdrop-blur-2xl my-5 p-8 sm:p-8 md:p-8 rounded-2xl shadow-2xl text-center w-full max-w-sm sm:max-w-md md:max-w-lg lg:max-w-xl">
             {meme ? (
               <img
-                className="shadow-lg rounded-lg object-cover w-full max-w-96 mx-auto"
+                className="shadow-lg rounded-lg object-cover w-full max-w-72 mx-auto"
                 src={meme}
                 alt="meme"
               />
