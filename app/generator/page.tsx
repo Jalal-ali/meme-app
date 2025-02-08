@@ -11,7 +11,7 @@ const page = (searchParam: any) => {
   const [meme, setMeme] = useState<string | null>(null);
   const [download, setDownload] = useState(false)
   const [toast, setToast] = useState<{ message: string; type: "success" | "error" } | null>(null);
-
+  
   // on page load 
   useEffect(() => {
     setMeme(url)
@@ -112,7 +112,7 @@ const page = (searchParam: any) => {
 
   return (
     <>
-      <div className="from-indigo-950 to-emerald-950 bg-gradient-to-tr pt-6 min-h-screen max-h-full">
+      <div className="from-indigo-950 to-emerald-950 bg-gradient-to-tr pt-0 min-h-screen max-h-full">
         {/* Go Back Button */}
   <button 
     className="absolute top-4 left-4 flex justify-center gap-2 items-center text-center bg-white bg-opacity-10 hover:bg-opacity-30 text-white px-4 py-2 rounded-lg shadow-md hover:bg-gray-200 transition"
